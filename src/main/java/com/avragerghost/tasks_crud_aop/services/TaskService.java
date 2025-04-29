@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.avragerghost.tasks_crud_aop.aspects.annotations.LogExecTime;
+import com.avragerghost.tasks_crud_aop.aspects.annotations.RequireRole;
 import com.avragerghost.tasks_crud_aop.dtos.TaskDTO;
 import com.avragerghost.tasks_crud_aop.enums.TaskState;
 import com.avragerghost.tasks_crud_aop.enums.UserRole;
@@ -39,6 +41,7 @@ public class TaskService {
      * 
      * @return Список всех задач ({@link Task})
      */
+    @LogExecTime
     public List<Task> getAllTasks() {
         return taskRepo.findAll();
     }
@@ -49,6 +52,7 @@ public class TaskService {
      * @param state ({@link TaskState}) состояние для исключения из списка
      * @return Список задач ({@link Task}) без выбранного состояния
      */
+    @LogExecTime
     public List<Task> getAllTasks(TaskState state) {
         return taskRepo.findAllByStateNot(state);
     }
@@ -74,6 +78,7 @@ public class TaskService {
      * @param dto ({@link TaskDTO})
      * @return созданная задача ({@link Task})
      */
+    @LogExecTime
     public Task createTask(TaskDTO dto) {
         User user = getCurrentUser();
         Task task = new Task();
@@ -91,6 +96,7 @@ public class TaskService {
      * @param dto ({@link TaskDTO})
      * @return измененная задача ({@link Task})
      */
+    @LogExecTime
     public Task updateTask(Long id, TaskDTO dto) {
         Task task = getTaskById(id);
         task.setState(dto.getState());
@@ -106,6 +112,7 @@ public class TaskService {
      * 
      * @param id : id задачи для удаления
      */
+    @RequireRole({ UserRole.ADMIN })
     public void deleteTask(Long id) {
         Task task = getTaskById(id);
         taskRepo.delete(task);

@@ -16,6 +16,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
      * @param state типа {@link TaskState}
      * @return Список задач, исключая задачи с указанным состоянием
      */
-    @Query("SELECT t FROM Task WHERE t.state != :state")
+    @Query("SELECT t FROM Task t WHERE t.state != :state")
     List<Task> findAllByStateNot(TaskState state);
 }
