@@ -6,15 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.avragerghost.tasks_crud_aop.aspects.annotations.ForbidForPublicAPI;
 import com.avragerghost.tasks_crud_aop.aspects.annotations.LogExecTime;
-import com.avragerghost.tasks_crud_aop.aspects.annotations.RequireRole;
 import com.avragerghost.tasks_crud_aop.dtos.TaskDTO;
 import com.avragerghost.tasks_crud_aop.enums.TaskState;
-import com.avragerghost.tasks_crud_aop.enums.UserRole;
 import com.avragerghost.tasks_crud_aop.models.Task;
-import com.avragerghost.tasks_crud_aop.models.User;
 import com.avragerghost.tasks_crud_aop.repositories.TaskRepository;
-import com.avragerghost.tasks_crud_aop.repositories.UserRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -22,7 +19,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TaskService {
     private final TaskRepository taskRepo;
-    private final UserRepository userRepo;
 
     /**
      * Метод для получения задачи по {@code id}.
@@ -59,16 +55,10 @@ public class TaskService {
     /**
      * Метод-заглушка. Всегда возвращает гостя.
      * 
-     * @return пользователь с ролью {@code GUEST}
+     * @return пользователь с {@code id 1}
      */
-    public User getCurrentUser() {
-        Long userId = 1L;
-        return userRepo.findById(userId).orElseGet(() -> {
-            User guest = new User();
-            guest.setRole(UserRole.GUEST);
-            guest.setName("Guest " + userId);
-            return userRepo.save(guest);
-        });
+    public Long getCurrentUserId() {
+        return 1L;
     }
 
     /**
@@ -79,12 +69,11 @@ public class TaskService {
      */
     @LogExecTime
     public Task createTask(TaskDTO dto) {
-        User user = getCurrentUser();
         Task task = new Task();
         task.setState(dto.getState());
         task.setTitle(dto.getTitle());
         task.setDescription(dto.getDescription());
-        task.setUser(user);
+        task.setUserId(getCurrentUserId());
         return taskRepo.save(task);
     }
 
@@ -111,7 +100,7 @@ public class TaskService {
      * 
      * @param id : id задачи для удаления
      */
-    @RequireRole({ UserRole.ADMIN })
+    @ForbidForPublicAPI
     public void deleteTask(Long id) {
         Task task = getTaskById(id);
         taskRepo.delete(task);

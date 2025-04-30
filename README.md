@@ -9,7 +9,7 @@ docker run --name tasksapp-pgdb -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admi
 
 ### Чеклист
 
-+ Task (id, title, description, userId) `userId как user, т.к. ORM`
++ Task (id, title, description, userId)
 + GET /tasks/{id}
 + GET /tasks
 + POST /tasks
@@ -17,6 +17,6 @@ docker run --name tasksapp-pgdb -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admi
 + DELETE /tasks/{id}
 + Аспект TaskAspect для логирования
     - `@Around` для замера времени выполнения
-    - `@Before` для ограничения выполнения метода в зависимости от роли пользователя
+    - `@Before` для ограничения выполнения метода для открытого API
     - `@AfterReturning` для стилизации разных типов задач в логе
     - `@AfterThrowing` для дополнительной информации об ошибке
