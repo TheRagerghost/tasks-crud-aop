@@ -2,7 +2,6 @@ package com.avragerghost.tasks_crud_aop.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,13 +16,13 @@ import com.avragerghost.tasks_crud_aop.models.User;
 import com.avragerghost.tasks_crud_aop.repositories.TaskRepository;
 import com.avragerghost.tasks_crud_aop.repositories.UserRepository;
 
-@Service
-public class TaskService {
-    @Autowired
-    private TaskRepository taskRepo;
+import lombok.AllArgsConstructor;
 
-    @Autowired
-    private UserRepository userRepo;
+@Service
+@AllArgsConstructor
+public class TaskService {
+    private final TaskRepository taskRepo;
+    private final UserRepository userRepo;
 
     /**
      * Метод для получения задачи по {@code id}.
