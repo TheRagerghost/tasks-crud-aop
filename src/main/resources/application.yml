@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: tasks-crud-aop
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tasksappdb
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
