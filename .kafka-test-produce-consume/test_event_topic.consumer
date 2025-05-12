@@ -1,0 +1,97 @@
+Consumer Info:
+{
+    "Topic": "test_event_topic",
+    "Broker": "127.0.0.1:9092",
+    "receiveMaximum": 100,
+    "group": "vscode-dbclient-consumer"
+}
+
+// Time: 2025-05-12 01:05:03, Partition: 0, Offset: 0
+{"event_id":"evt_001","user_id":"user_7421","event_type":"purchase","product_id":"prod_205","amount":49.99,"timestamp":"2023-05-15T10:30:45Z"}
+
+// Time: 2025-05-12 01:05:03, Partition: 0, Offset: 1
+{"event_id":"evt_002","user_id":"user_1532","event_type":"page_view","page_url":"/products/coffee-makers","timestamp":"2023-05-15T10:31:12Z"}
+
+// Time: 2025-05-12 01:05:03, Partition: 0, Offset: 2
+{"event_id":"evt_003","user_id":"user_8965","event_type":"login","device":"mobile","timestamp":"2023-05-15T10:32:01Z"}
+
+// Time: 2025-05-12 01:05:03, Partition: 0, Offset: 3
+{"event_id":"evt_004","user_id":"user_7421","event_type":"add_to_cart","product_id":"prod_118","quantity":2,"timestamp":"2023-05-15T10:33:22Z"}
+
+// Time: 2025-05-12 01:05:03, Partition: 0, Offset: 4
+{"event_id":"evt_005","user_id":"user_0003","event_type":"search","search_term":"wireless headphones","timestamp":"2023-05-15T10:34:15Z"}
+
+// Time: 2025-05-12 01:08:23, Partition: 0, Offset: 5
+{"event_id":"evt_001","user_id":"user_7421","event_type":"purchase","product_id":"prod_205","amount":49.99,"timestamp":"2023-05-15T10:30:45Z"}
+
+// Time: 2025-05-12 01:08:23, Partition: 0, Offset: 6
+{"event_id":"evt_002","user_id":"user_1532","event_type":"page_view","page_url":"/products/coffee-makers","timestamp":"2023-05-15T10:31:12Z"}
+
+// Time: 2025-05-12 01:08:23, Partition: 0, Offset: 7
+{"event_id":"evt_003","user_id":"user_8965","event_type":"login","device":"mobile","timestamp":"2023-05-15T10:32:01Z"}
+
+// Time: 2025-05-12 01:08:23, Partition: 0, Offset: 8
+{"event_id":"evt_004","user_id":"user_7421","event_type":"add_to_cart","product_id":"prod_118","quantity":2,"timestamp":"2023-05-15T10:33:22Z"}
+
+// Time: 2025-05-12 01:08:23, Partition: 0, Offset: 9
+{"event_id":"evt_005","user_id":"user_0003","event_type":"search","search_term":"wireless headphones","timestamp":"2023-05-15T10:34:15Z"}
+
+// Time: 2025-05-12 01:08:32, Partition: 0, Offset: 10
+{"event_id":"evt_001","user_id":"user_7421","event_type":"purchase","product_id":"prod_205","amount":49.99,"timestamp":"2023-05-15T10:30:45Z"}
+
+// Time: 2025-05-12 01:08:32, Partition: 0, Offset: 11
+{"event_id":"evt_002","user_id":"user_1532","event_type":"page_view","page_url":"/products/coffee-makers","timestamp":"2023-05-15T10:31:12Z"}
+
+// Time: 2025-05-12 01:08:32, Partition: 0, Offset: 12
+{"event_id":"evt_003","user_id":"user_8965","event_type":"login","device":"mobile","timestamp":"2023-05-15T10:32:01Z"}
+
+// Time: 2025-05-12 01:08:32, Partition: 0, Offset: 13
+{"event_id":"evt_004","user_id":"user_7421","event_type":"add_to_cart","product_id":"prod_118","quantity":2,"timestamp":"2023-05-15T10:33:22Z"}
+
+// Time: 2025-05-12 01:08:32, Partition: 0, Offset: 14
+{"event_id":"evt_005","user_id":"user_0003","event_type":"search","search_term":"wireless headphones","timestamp":"2023-05-15T10:34:15Z"}
+
+// Time: 2025-05-12 01:08:37, Partition: 0, Offset: 15
+{"event_id":"evt_001","user_id":"user_7421","event_type":"purchase","product_id":"prod_205","amount":49.99,"timestamp":"2023-05-15T10:30:45Z"}
+
+// Time: 2025-05-12 01:08:37, Partition: 0, Offset: 16
+{"event_id":"evt_002","user_id":"user_1532","event_type":"page_view","page_url":"/products/coffee-makers","timestamp":"2023-05-15T10:31:12Z"}
+
+// Time: 2025-05-12 01:08:37, Partition: 0, Offset: 17
+{"event_id":"evt_003","user_id":"user_8965","event_type":"login","device":"mobile","timestamp":"2023-05-15T10:32:01Z"}
+
+// Time: 2025-05-12 01:08:37, Partition: 0, Offset: 18
+{"event_id":"evt_004","user_id":"user_7421","event_type":"add_to_cart","product_id":"prod_118","quantity":2,"timestamp":"2023-05-15T10:33:22Z"}
+
+// Time: 2025-05-12 01:08:37, Partition: 0, Offset: 19
+{"event_id":"evt_005","user_id":"user_0003","event_type":"search","search_term":"wireless headphones","timestamp":"2023-05-15T10:34:15Z"}
+
+// Time: 2025-05-12 01:10:17, Partition: 0, Offset: 20
+{"event_id":"evt_001","user_id":"user_7421","event_type":"purchase","product_id":"prod_205","amount":49.99,"timestamp":"2023-05-15T10:30:45Z"}
+
+// Time: 2025-05-12 01:10:17, Partition: 0, Offset: 21
+{"event_id":"evt_002","user_id":"user_1532","event_type":"page_view","page_url":"/products/coffee-makers","timestamp":"2023-05-15T10:31:12Z"}
+
+// Time: 2025-05-12 01:10:17, Partition: 0, Offset: 22
+{"event_id":"evt_003","user_id":"user_8965","event_type":"login","device":"mobile","timestamp":"2023-05-15T10:32:01Z"}
+
+// Time: 2025-05-12 01:10:17, Partition: 0, Offset: 23
+{"event_id":"evt_004","user_id":"user_7421","event_type":"add_to_cart","product_id":"prod_118","quantity":2,"timestamp":"2023-05-15T10:33:22Z"}
+
+// Time: 2025-05-12 01:10:17, Partition: 0, Offset: 24
+{"event_id":"evt_005","user_id":"user_0003","event_type":"search","search_term":"wireless headphones","timestamp":"2023-05-15T10:34:15Z"}
+
+// Time: 2025-05-12 01:10:25, Partition: 0, Offset: 25
+{"event_id":"evt_001","user_id":"user_7421","event_type":"purchase","product_id":"prod_205","amount":49.99,"timestamp":"2023-05-15T10:30:45Z"}
+
+// Time: 2025-05-12 01:10:25, Partition: 0, Offset: 26
+{"event_id":"evt_002","user_id":"user_1532","event_type":"page_view","page_url":"/products/coffee-makers","timestamp":"2023-05-15T10:31:12Z"}
+
+// Time: 2025-05-12 01:10:25, Partition: 0, Offset: 27
+{"event_id":"evt_003","user_id":"user_8965","event_type":"login","device":"mobile","timestamp":"2023-05-15T10:32:01Z"}
+
+// Time: 2025-05-12 01:10:25, Partition: 0, Offset: 28
+{"event_id":"evt_004","user_id":"user_7421","event_type":"add_to_cart","product_id":"prod_118","quantity":2,"timestamp":"2023-05-15T10:33:22Z"}
+
+// Time: 2025-05-12 01:10:25, Partition: 0, Offset: 29
+{"event_id":"evt_005","user_id":"user_0003","event_type":"search","search_term":"wireless headphones","timestamp":"2023-05-15T10:34:15Z"}

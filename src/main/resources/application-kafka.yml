@@ -1,0 +1,12 @@
+tasksapp:
+  kafka:
+    consumer:
+      group:
+        id: email-on-task-state-update-group
+    bootstrap:
+      server: localhost:9092
+    max:
+      poll:
+        records: 1
+    topic:
+      task_updated_state: task-updated-state

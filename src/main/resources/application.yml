@@ -1,6 +1,10 @@
 spring:
   application:
     name: tasks-crud-aop
+  profiles:
+    include:
+      - kafka
+      - mail
   datasource:
     url: jdbc:postgresql://localhost:5432/tasksappdb
     username: admin
