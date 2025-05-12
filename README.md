@@ -39,8 +39,12 @@ docker compose up
 - NotificationService: функционал для форматирования и отправки сообщения на указанный почтовый адрес.
 
 ### Результат
+<<<<<<< HEAD
 
 ![alt text](assets/email_success.png)
 
 И после изменений:
 ![alt text](assets/new_emails.png)
+=======
+  ![alt text](assets/email_success.png)
+>>>>>>> 6e69bba2d326aebc11ab7d82c9ba5e3629d186cf
