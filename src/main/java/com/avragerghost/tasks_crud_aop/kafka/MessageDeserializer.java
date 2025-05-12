@@ -7,7 +7,6 @@ import org.apache.kafka.common.header.Headers;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.stereotype.Component;
 
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,10 +25,12 @@ public class MessageDeserializer<T> extends JsonDeserializer<T> {
         try {
             return super.deserialize(topic, headers, data);
         } catch (Exception e) {
-            log.error("Произошла ошибка при десериализации сообщения: {} - Error: {}", getMessage(data), e.getMessage());
+            log.error("Произошла ошибка при десериализации сообщения: {} - Error: {}", getMessage(data),
+                    e.getMessage());
             log.debug("Full error: {}", e);
             // Должно отправлять автоматически в DLQ
-            throw new SerializationException("Произошла ошибка при десериализации сообщения: [%s]".formatted(getMessage(data)), e);
+            throw new SerializationException(
+                    "Произошла ошибка при десериализации сообщения: [%s]".formatted(getMessage(data)), e);
         }
     }
 
@@ -38,11 +39,13 @@ public class MessageDeserializer<T> extends JsonDeserializer<T> {
         try {
             return super.deserialize(topic, data);
         } catch (Exception e) {
-            log.error("Произошла ошибка при десериализации сообщения: {} - Error: {}", getMessage(data), e.getMessage());
+            log.error("Произошла ошибка при десериализации сообщения: {} - Error: {}", getMessage(data),
+                    e.getMessage());
             log.debug("Full error: {}", e);
             // Должно отправлять автоматически в DLQ
-            throw new SerializationException("Произошла ошибка при десериализации сообщения: [%s]".formatted(getMessage(data)), e);
+            throw new SerializationException(
+                    "Произошла ошибка при десериализации сообщения: [%s]".formatted(getMessage(data)), e);
         }
     }
-    
+
 }

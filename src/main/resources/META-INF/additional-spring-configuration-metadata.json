@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "send.to.my.mail",
+    "type": "java.lang.String",
+    "description": "Email address to send messages to."
+  },
+  {
+    "name": "tasksapp.kafka.consumer.group.id",
+    "type": "java.lang.String",
+    "description": "Name of consumer group"
+  },
+  {
+    "name": "tasksapp.kafka.bootstrap.server",
+    "type": "java.lang.String",
+    "description": "Kafka host server"
+  },
+  {
+    "name": "tasksapp.kafka.max.poll.records",
+    "type": "java.lang.String",
+    "description": "Number of records to poll simultaneously"
+  },
+  {
+    "name": "tasksapp.kafka.topic.task_updated_state",
+    "type": "java.lang.String",
+    "description": "Name of the 'task_updated_state' topic"
+  }
+]}

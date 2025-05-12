@@ -7,11 +7,13 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.ByteArraySerializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
@@ -28,8 +30,8 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.util.backoff.FixedBackOff;
 
 import com.avragerghost.tasks_crud_aop.dtos.TaskStateDTO;
+import com.avragerghost.tasks_crud_aop.kafka.KafkaTaskUpdStateProducer;
 import com.avragerghost.tasks_crud_aop.kafka.MessageDeserializer;
-import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -79,7 +81,8 @@ public class KafkaConfig {
     private <T> void factoryBuilder(ConsumerFactory<String, T> consumerFactory,
             ConcurrentKafkaListenerContainerFactory<String, T> factory) {
         factory.setConsumerFactory(consumerFactory);
-        factory.setBatchListener(true);
+        // Обработка по-одному
+        factory.setBatchListener(false);
         factory.setConcurrency(1);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
         factory.getContainerProperties().setPollTimeout(5000);
@@ -109,18 +112,14 @@ public class KafkaConfig {
         return new KafkaTemplate<>(producerPatFactory);
     }
 
-    /*
-     * @Bean
-     * 
-     * @ConditionalOnProperty(value = "tasksapp.kafka.producer.enable", havingValue
-     * = "true", matchIfMissing = true)
-     * public KafkaTaskUpdStateProducer
-     * producerTaskUpdState(@Qualifier("task-upd-state") KafkaTemplate<String,
-     * TaskStateDTO> template) {
-     * template.setDefaultTopic(taskUpdStateTopic);
-     * return new KafkaTaskUpdStateProducer();
-     * }
-     */
+    @Primary
+    @Bean
+    @ConditionalOnProperty(value = "tasksapp.kafka.producer.enable", havingValue = "true", matchIfMissing = true)
+    public KafkaTaskUpdStateProducer producerTaskUpdState(
+            @Qualifier("task-upd-state") KafkaTemplate<String, TaskStateDTO> template) {
+        template.setDefaultTopic(taskUpdStateTopic);
+        return new KafkaTaskUpdStateProducer(template);
+    }
 
     @Bean
     public ProducerFactory<String, TaskStateDTO> producerTaskUpdStateFactory() {
