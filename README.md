@@ -37,4 +37,6 @@ docker compose up
 - TaskUpdState Producer: отправка сообщение при изменении 'state' у Task через PUT update().
 - TaskUpdState Consumer: получение сообщения, отправка email (via NotificationService).
 - NotificationService: функционал для форматирования и отправки сообщения на указанный почтовый адрес.
+- 
+### Результат
   ![alt text](assets/email_success.png)
