@@ -1,0 +1,39 @@
+[
+  {
+    "event_id": "evt_001",
+    "user_id": "user_7421",
+    "event_type": "purchase",
+    "product_id": "prod_205",
+    "amount": 49.99,
+    "timestamp": "2023-05-15T10:30:45Z"
+  },
+  {
+    "event_id": "evt_002",
+    "user_id": "user_1532",
+    "event_type": "page_view",
+    "page_url": "/products/coffee-makers",
+    "timestamp": "2023-05-15T10:31:12Z"
+  },
+  {
+    "event_id": "evt_003",
+    "user_id": "user_8965",
+    "event_type": "login",
+    "device": "mobile",
+    "timestamp": "2023-05-15T10:32:01Z"
+  },
+  {
+    "event_id": "evt_004",
+    "user_id": "user_7421",
+    "event_type": "add_to_cart",
+    "product_id": "prod_118",
+    "quantity": 2,
+    "timestamp": "2023-05-15T10:33:22Z"
+  },
+  {
+    "event_id": "evt_005",
+    "user_id": "user_0003",
+    "event_type": "search",
+    "search_term": "wireless headphones",
+    "timestamp": "2023-05-15T10:34:15Z"
+  }
+]
