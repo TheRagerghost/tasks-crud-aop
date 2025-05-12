@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MessageDeserializer<T> extends JsonDeserializer<T> {
 
-    // Повторил на всякий случай, лишним не будет
     private String getMessage(byte[] data) {
         return new String(data, StandardCharsets.UTF_8);
     }

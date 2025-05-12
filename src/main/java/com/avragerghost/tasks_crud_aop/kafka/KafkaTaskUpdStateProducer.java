@@ -17,7 +17,6 @@ public class KafkaTaskUpdStateProducer {
     private final KafkaTemplate<String, TaskStateDTO> template;
 
     public void send(TaskStateDTO taskStateDTO) {
-        log.info("TaskUpdState producer sends a message.");
         try {
             template.sendDefault(UUID.randomUUID().toString(), taskStateDTO);
             template.flush();

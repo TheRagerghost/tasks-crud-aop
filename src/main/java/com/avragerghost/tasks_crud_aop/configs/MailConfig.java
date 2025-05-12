@@ -1,28 +1,31 @@
 package com.avragerghost.tasks_crud_aop.configs;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import lombok.Getter;
+import lombok.Setter;
+
 ///mail-config.yml скрыт .gitignore
-@Configuration
+@ConfigurationProperties(prefix = "spring.mail")
+@ConfigurationPropertiesScan
+@Getter
+@Setter
 public class MailConfig {
 
-    @Value("${spring.mail.host}")
     private String host;
-
-    @Value("${spring.mail.port}")
     private int port;
-
-    @Value("${spring.mail.username}")
     private String username;
-
-    @Value("${spring.mail.password}")
     private String password;
+    private String protocol = "smtp";
+    private Map<String, String> properties = new HashMap<>();
 
     @Bean
     public JavaMailSender javaMailSender() {
@@ -31,11 +34,12 @@ public class MailConfig {
         mailSender.setPort(port);
         mailSender.setUsername(username);
         mailSender.setPassword(password);
-
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+        mailSender.setProtocol(protocol);
+        mailSender.setJavaMailProperties(new Properties() {
+            {
+                putAll(properties);
+            }
+        });
 
         return mailSender;
     }

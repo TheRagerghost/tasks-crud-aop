@@ -1,14 +1,17 @@
 package com.avragerghost.tasks_crud_aop.services;
 
 import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.avragerghost.tasks_crud_aop.aspects.annotations.ForbidForPublicAPI;
 import com.avragerghost.tasks_crud_aop.aspects.annotations.LogExecTime;
 import com.avragerghost.tasks_crud_aop.dtos.TaskDTO;
-import com.avragerghost.tasks_crud_aop.dtos.TaskStateDTO;
 import com.avragerghost.tasks_crud_aop.dtos.mappers.TaskStateMapper;
 import com.avragerghost.tasks_crud_aop.enums.TaskState;
 import com.avragerghost.tasks_crud_aop.kafka.KafkaTaskUpdStateProducer;
@@ -24,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TaskService {
     private final TaskRepository taskRepo;
     private final KafkaTaskUpdStateProducer kTaskUpdStateProd;
+    private final TaskStateMapper taskStateMapper;
 
     /**
      * Метод для получения задачи по {@code id}.
@@ -90,24 +94,25 @@ public class TaskService {
      * @return измененная задача ({@link Task})
      */
     @LogExecTime
+    @Transactional
     public Task updateTask(Long id, TaskDTO dto) {
+
         Task task = getTaskById(id);
-        // task.setState(dto.getState());
-        taskSwitchStateIfNeeded(dto.getState(), task);
+        boolean stateChanged = task.getState() != dto.getState();
+        task.setState(dto.getState());
         task.setTitle(dto.getTitle());
         task.setDescription(dto.getDescription());
-        return taskRepo.save(task);
-    }
-
-    private void taskSwitchStateIfNeeded(TaskState newState, Task task) {
-        TaskState currentState = task.getState();
-        log.info("Change state try: {} => {}", currentState, newState);
-        if (currentState.toString() != newState.toString()) {
-            log.info("Changing state: {} => {}", currentState, newState);
-            task.setState(newState);
-            TaskStateDTO taskStateDTO = new TaskStateMapper().toDto(task);
-            kTaskUpdStateProd.send(taskStateDTO);
+        Task savedTask = taskRepo.save(task);
+        if (stateChanged) {
+            TransactionSynchronizationManager.registerSynchronization(
+                    new TransactionSynchronization() {
+                        @Override
+                        public void afterCommit() {
+                            kTaskUpdStateProd.send(taskStateMapper.toDto(savedTask));
+                        }
+                    });
         }
+        return savedTask;
     }
 
     /**

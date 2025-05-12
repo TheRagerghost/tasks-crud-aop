@@ -81,8 +81,7 @@ public class KafkaConfig {
     private <T> void factoryBuilder(ConsumerFactory<String, T> consumerFactory,
             ConcurrentKafkaListenerContainerFactory<String, T> factory) {
         factory.setConsumerFactory(consumerFactory);
-        // Обработка по-одному
-        factory.setBatchListener(false);
+        factory.setBatchListener(true);
         factory.setConcurrency(1);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
         factory.getContainerProperties().setPollTimeout(5000);

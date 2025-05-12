@@ -13,8 +13,4 @@ public class TaskStateMapper {
         taskStateDTO.setState(task.getState());
         return taskStateDTO;
     }
-
-    /* public Task toEntity(TaskStateDTO taskStateDTO) {
-
-    } */
 }
