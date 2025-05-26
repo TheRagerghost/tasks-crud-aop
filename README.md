@@ -44,3 +44,16 @@ docker compose up
 
 И после изменений:
 ![alt text](assets/new_emails.png)
+
+# Задача 3. Unit и интеграционные тесты
+
+### Чеклист
+
+- модульные (unit) тесты для сервиса / мапперов
+- интеграционные тесты для сервиса / репозитория / контроллера
+
+### Результат
+
+![alt text](assets/tests.png)
+
+![alt text](assets/test_coverage.png)
