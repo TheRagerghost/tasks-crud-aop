@@ -10,7 +10,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.springframework.web.server.ResponseStatusException;
 
 import com.avragerghost.tasks_crud_aop.aspects.annotations.ForbidForPublicAPI;
-import com.avragerghost.tasks_crud_aop.aspects.annotations.LogExecTime;
+import com.avragerghost.request_logger_aop.aspects.annotations.LogExecTime;
 import com.avragerghost.tasks_crud_aop.dtos.TaskDTO;
 import com.avragerghost.tasks_crud_aop.dtos.mappers.TaskStateMapper;
 import com.avragerghost.tasks_crud_aop.enums.TaskState;
