@@ -6,9 +6,8 @@ spring:
       - kafka
       - mail
   datasource:
-    url:
-    username:
-    password:
+    url: jdbc:tc:postgresql:11.13:///tasks_crud_aop
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
   jpa:
     hibernate:
       ddl-auto: update

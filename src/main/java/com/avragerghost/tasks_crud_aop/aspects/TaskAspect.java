@@ -3,10 +3,8 @@ package com.avragerghost.tasks_crud_aop.aspects;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -25,24 +23,12 @@ public class TaskAspect {
 
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_GREEN = "\u001B[32m";
-    private static final String ANSI_YELLOW = "\u001B[33m";
     private static final String ANSI_DIM = "\u001B[2m";
     private static final String ANSI_RESET = "\u001B[0m";
 
     @Pointcut("execution(* com.avragerghost.tasks_crud_aop.services.TaskService.*(..))")
     public void taskServiceMethods() {
     };
-
-    @Around("@annotation(com.avragerghost.tasks_crud_aop.aspects.annotations.LogExecTime)")
-    public Object logExecTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        Long startTime = System.currentTimeMillis();
-        Object result = joinPoint.proceed();
-        Long endTime = System.currentTimeMillis();
-        logger.info(
-                "\nМетод " + ANSI_GREEN + "{}" + ANSI_RESET + " был выполнен за " + ANSI_YELLOW + "{}ms" + ANSI_RESET,
-                joinPoint.getSignature().getName(), endTime - startTime);
-        return result;
-    }
 
     @Before("@annotation(com.avragerghost.tasks_crud_aop.aspects.annotations.ForbidForPublicAPI)")
     public void blockForPublicAPI(JoinPoint joinPoint) {

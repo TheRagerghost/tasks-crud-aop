@@ -33,7 +33,7 @@ public class TaskController {
     private final TaskMapper taskMapper;
 
     @PostMapping
-    public ResponseEntity<TaskDTO> createTask(@Valid @RequestBody TaskDTO dto) {
+    public ResponseEntity<TaskDTO> createTask(@RequestBody @Valid TaskDTO dto) {
         Task task = taskService.createTask(dto);
 
         return ResponseEntity.ok(taskMapper.toDTO(task));
@@ -41,7 +41,7 @@ public class TaskController {
 
     @PutMapping("/{id}")
     @LoggableControllerMethod
-    public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @Valid @RequestBody TaskDTO dto) {
+    public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody @Valid TaskDTO dto) {
         Task task = taskService.updateTask(id, dto);
 
         return ResponseEntity.ok(taskMapper.toDTO(task));

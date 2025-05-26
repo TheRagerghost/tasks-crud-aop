@@ -2,18 +2,17 @@ package com.avragerghost.tasks_crud_aop.services;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.avragerghost.tasks_crud_aop.aspects.annotations.ForbidForPublicAPI;
 import com.avragerghost.request_logger_aop.aspects.annotations.LogExecTime;
 import com.avragerghost.tasks_crud_aop.dtos.TaskDTO;
 import com.avragerghost.tasks_crud_aop.dtos.mappers.TaskStateMapper;
 import com.avragerghost.tasks_crud_aop.enums.TaskState;
+import com.avragerghost.tasks_crud_aop.exceptions.TaskNotFoundException;
 import com.avragerghost.tasks_crud_aop.kafka.KafkaTaskUpdStateProducer;
 import com.avragerghost.tasks_crud_aop.models.Task;
 import com.avragerghost.tasks_crud_aop.repositories.TaskRepository;
@@ -37,7 +36,7 @@ public class TaskService {
      */
     public Task getTaskById(Long id) {
         return taskRepo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Задача не найдена"));
+                .orElseThrow(() -> new TaskNotFoundException("Задача не найдена"));
     }
 
     /**
